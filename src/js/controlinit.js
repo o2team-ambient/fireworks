@@ -83,6 +83,11 @@ let controlInit = () => {
           // window[O2_AMBIENT_INIT]()
           this.resetCanvas()
         })
+      
+      typeof config.limitDur !== 'undefined' && gui.add(config, 'limitDur', 0, 60, 1)
+        .name('持续时间（秒）').onFinishChange(val => {
+          this.resetCanvas()
+        })
       this.gui = gui
       // 设置控制面板层级
       this.setGUIzIndex(2)

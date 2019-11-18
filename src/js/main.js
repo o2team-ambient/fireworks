@@ -44,6 +44,9 @@ class Main {
     this.isStart = false
     this.reset()
     this.fireSpeed = 6
+    this.limitDur = 0
+    this.isStop = false
+    this.sto = null
     this.init()
   }
 
@@ -56,6 +59,13 @@ class Main {
     this.fireworks = []
     this.isStart = true
     let i = this.minFire
+    if (this.sto) clearTimeout(this.sto)
+    if (this.limitDur) {
+      this.sto = setTimeout(() => {
+        this.isStop = true
+        console.log(this.isStop)
+      }, this.limitDur * 1000)
+    }
     while (i--) {
       this.fireworks.push(
         this.Firework(Math.random() * this.dom.width, this.dom.height * Math.random(), this)
@@ -84,7 +94,7 @@ class Main {
           this.sparks[k].draw()
         }
       }
-      if (this.fireworks.length < this.minFire) {
+      if (this.fireworks.length < this.minFire && !this.isStop) {
         this.fireworks.push(this.Firework(null, null, this))
       }
     }
@@ -164,8 +174,15 @@ class Main {
     this.sumColor = []
     this.fireworks = []
     this.sparks = []
+    this.limitDur = window[O2_AMBIENT_CONFIG].limitDur || 0
     window[O2_AMBIENT_CONFIG].textures.forEach(item => this.sumColor.push(item.value))
     this.isStart = false
+    if (this.sto) clearTimeout(this.sto)
+    if (this.limitDur) {
+      this.sto = setTimeout(() => {
+        this.isStop = true
+      }, this.limitDur * 1000)
+    }
     this.create()
     this.isStart = true
   }
