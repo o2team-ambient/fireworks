@@ -17,6 +17,9 @@ const isShowController = getParameterByName('controller') // 是否展示控制�
 const isAmbientPlat = getParameterByName('platform') === '1' // 是否平台环境
 
 class Controller {
+  msgTs
+  transMsgTs
+
   constructor () {
     this.config = window[O2_AMBIENT_CONFIG] || {}
     this.isShowController = isShowController
@@ -43,8 +46,12 @@ class Controller {
   bindMsg () {
     window.addEventListener('message', (msg) => {
       if (msg.data.type !== 'reset') return
-      window[O2_AMBIENT_CONFIG] = Object.assign(window[O2_AMBIENT_CONFIG], msg.data.data)
-      this.resetCanvas()
+      if (this.msgTs) return
+      this.msgTs = setTimeout(() => {
+        this.msgTs = null
+        window[O2_AMBIENT_CONFIG] = Object.assign(window[O2_AMBIENT_CONFIG], msg.data.data)
+        this.resetCanvas()
+      }, 200)
     })
   }
 
@@ -67,11 +74,16 @@ class Controller {
 
   // 传送数据
   transMsg (dom) {
-    let transWin = dom.contentWindow
-    transWin.postMessage({
-      type: 'reset',
-      data: window[O2_AMBIENT_CONFIG]
-    }, `${window.location.protocol}${dom.getAttribute('src')}`)
+    if (this.transMsgTs) return
+    this.transMsgTs = setTimeout(() => {
+      this.transMsgTs = null
+      let transWin = dom.contentWindow
+
+      transWin.postMessage({
+        type: 'reset',
+        data: window[O2_AMBIENT_CONFIG]
+      }, `${window.location.protocol}${dom.getAttribute('src')}`)
+    }, 200)
   }
 
   // iframe dom
