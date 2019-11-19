@@ -77,7 +77,7 @@ class Main {
   create() {
     if (!this.isStart) return
 
-    if (!(!this.fireworks.length && !this.sparks.length)) {
+    if (!(!this.fireworks.length && !this.sparks.length) || !this.isStop) {
       setTimeout(this.create.bind(this), 1000 / 60)
     } else {
       if (!this.endCallback) return
@@ -192,6 +192,7 @@ class Main {
     this.limitDur = window[O2_AMBIENT_CONFIG].limitDur || 0
     window[O2_AMBIENT_CONFIG].textures.forEach(item => this.sumColor.push(item.value))
     this.endCallback = window[O2_AMBIENT_CONFIG].endCallback
+    this.isStop = false
     this.isStart = false
     if (this.sto) clearTimeout(this.sto)
     if (this.limitDur) {
