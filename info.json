@@ -5,9 +5,9 @@
   "title": "fireworks",
   "ambName": "烟火类",
   "github": "https://github.com/o2team-ambient/fireworks",
-  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-fireworks.css?t=1574130985000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\">\n    <canvas></canvas>\n  </div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-fireworks.js?t=1574130985000\"></script>",
-  "controlUrl": "//storage.jd.com/ambient/control-fireworks.js?t=1574130985000",
-  "configUrl": "//storage.jd.com/ambient/config-fireworks.js?t=1574130985000",
+  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-fireworks.css?t=1574131436000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\">\n    <canvas></canvas>\n  </div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-fireworks.js?t=1574131436000\"></script>",
+  "controlUrl": "//storage.jd.com/ambient/control-fireworks.js?t=1574131436000",
+  "configUrl": "//storage.jd.com/ambient/config-fireworks.js?t=1574131436000",
   "placeholderImg": "//storage.jd.com/ambient/fireworks_placeholder.png?t=1574061590000",
   "spriteImg": "//storage.jd.com/ambient/fireworks_sprite.png?t=1574061590000"
 }

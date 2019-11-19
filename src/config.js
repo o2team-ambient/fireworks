@@ -3,7 +3,7 @@ window[O2_AMBIENT_CONFIG] = {
   particleNumber: 2,
   size: 100,
   speed: 6,
-  limitDur: 2,
+  limitDur: 0,
   textures: [
     {name: '颜色1', value: '#6ae5ab'},
     {name: '颜色2', value: '#88e3b2'},
