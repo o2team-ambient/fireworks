@@ -1,7 +1,7 @@
 {
   "name": "@o2team/ambient-fireworks",
   "version": "1.0.0",
-  "description": "夸克动效库-",
+  "description": "夸克动效库-烟花",
   "main": "dist/index.min.js",
   "scripts": {
     "start": "am s",
@@ -11,22 +11,24 @@
   "author": "huangxiaofang3",
   "license": "ISC",
   "dependencies": {
-    "@o2team/ambient-dat.gui": "^0.7.9",
     "canvas": "^2.5.0",
-    "peer": "^0.2.10"
+    "peer": "^0.2.10",
+    "@o2team/ambient-dat.gui": "^0.7.14",
+    "@o2team/ambient-report": "^1.0.5",
+    "babel-runtime": "^6.26.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/plugin-transform-runtime": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "@babel/runtime": "^7.4.3",
     "eslint": "^5.2.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
     "json-loader": "^0.5.7",
     "rollup": "^1.8.0",
     "rollup-plugin-babel": "^4.3.2",
