@@ -42,11 +42,12 @@ class Main {
     this.sparkNum = 100
     this.sumColor = []
     this.isStart = false
-    this.reset()
     this.fireSpeed = 6
     this.limitDur = 0
     this.isStop = false
     this.sto = null
+    this.endCallback = null
+    this.reset()
     this.init()
   }
 
@@ -63,7 +64,6 @@ class Main {
     if (this.limitDur) {
       this.sto = setTimeout(() => {
         this.isStop = true
-        console.log(this.isStop)
       }, this.limitDur * 1000)
     }
     while (i--) {
@@ -75,28 +75,43 @@ class Main {
   }
 
   create() {
-    if (this.isStart) {
+    if (!this.isStart) return
+
+    if (!(!this.fireworks.length && !this.sparks.length)) {
       setTimeout(this.create.bind(this), 1000 / 60)
-      this.content.clearRect(0, 0, this.dom.width, this.dom.height)
-      for (let m = 0; m < this.fireworks.length; m++) {
-        if (this.fireworks[m].dead) {
-          this.fireworks.splice(m, 1)
-        } else {
-          this.fireworks[m].move()
-          this.fireworks[m].draw()
-        }
+    } else {
+      if (!this.endCallback) return
+      if (typeof this.endCallback === 'function') {
+        this.endCallback()
+      } else if (typeof this.endCallback === 'string') {
+        try {
+          eval(`(${decodeURI(this.endCallback)})()`)
+        } catch(e) {}
       }
-      for (let k = 0; k < this.sparks.length; k++) {
-        if (this.sparks[k].dead) {
-          this.sparks.splice(k, 1)
-        } else {
-          this.sparks[k].move()
-          this.sparks[k].draw()
-        }
+    }
+
+    this.content.clearRect(0, 0, this.dom.width, this.dom.height)
+
+    for (let m = 0; m < this.fireworks.length; m++) {
+      if (this.fireworks[m].dead) {
+        this.fireworks.splice(m, 1)
+      } else {
+        this.fireworks[m].move()
+        this.fireworks[m].draw()
       }
-      if (this.fireworks.length < this.minFire && !this.isStop) {
-        this.fireworks.push(this.Firework(null, null, this))
+    }
+
+    for (let k = 0; k < this.sparks.length; k++) {
+      if (this.sparks[k].dead) {
+        this.sparks.splice(k, 1)
+      } else {
+        this.sparks[k].move()
+        this.sparks[k].draw()
       }
+    }
+
+    if (this.fireworks.length < this.minFire && !this.isStop) {
+      this.fireworks.push(this.Firework(null, null, this))
     }
   }
 
@@ -176,6 +191,7 @@ class Main {
     this.sparks = []
     this.limitDur = window[O2_AMBIENT_CONFIG].limitDur || 0
     window[O2_AMBIENT_CONFIG].textures.forEach(item => this.sumColor.push(item.value))
+    this.endCallback = window[O2_AMBIENT_CONFIG].endCallback
     this.isStart = false
     if (this.sto) clearTimeout(this.sto)
     if (this.limitDur) {
